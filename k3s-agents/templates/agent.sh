@@ -1,4 +1,18 @@
 #! /bin/bash
 
-curl -sfL https://get.k3s.io | K3S_TOKEN="${token}" INSTALL_K3S_VERSION="v1.19.3+k3s3" K3S_URL="https://${server_address}:6443" sh -s - \
-    --node-label "svccontroller.k3s.cattle.io/enablelb=true"
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Install k3s
+export INSTALL_K3S_SKIP_DOWNLOAD=true
+# shellcheck disable=SC2154
+export K3S_URL="https://${server_address}:6443"
+# shellcheck disable=SC2154
+export K3S_TOKEN="${token}"
+
+# shellcheck disable=SC2154
+/usr/local/bin/install-k3s.sh \
+    --container-runtime-endpoint=/var/run/containerd/containerd.sock
+
+mkdir -p /run/containerd/io.containerd.runtime.v1.linux/k8s.io

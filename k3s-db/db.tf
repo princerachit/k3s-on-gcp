@@ -6,7 +6,7 @@ resource "random_id" "k3s-db" {
 resource "google_sql_database_instance" "k3s-db" {
   name             = random_id.k3s-db.hex
   region           = var.region
-  database_version = "POSTGRES_11"
+  database_version = "POSTGRES_13"
 
   settings {
     tier              = var.db_tier
@@ -14,6 +14,11 @@ resource "google_sql_database_instance" "k3s-db" {
     disk_size         = 50
     disk_type         = "PD_SSD"
     disk_autoresize   = true
+
+    database_flags {
+      name  = "max_connections"
+      value = 100
+    }
 
     ip_configuration {
       ipv4_enabled    = "false"

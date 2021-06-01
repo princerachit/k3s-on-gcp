@@ -18,7 +18,7 @@ variable "machine_type" {
 }
 
 variable "target_size" {
-  type = number
+  type    = number
   default = 3
 }
 

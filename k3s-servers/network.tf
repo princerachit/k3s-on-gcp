@@ -20,18 +20,6 @@ resource "google_compute_address" "k3s-api-server-external" {
   region = var.region
 }
 
-resource "google_compute_firewall" "k3s-api-allow-hc" {
-  name          = "k3s-api-allow-hc"
-  network       = var.network
-  source_ranges = ["130.211.0.0/22", "35.191.0.0/16", "209.85.152.0/22", "209.85.204.0/22"]
-  allow {
-    protocol = "tcp"
-    ports    = [6443]
-  }
-  target_tags = ["k3s-server"]
-  direction   = "INGRESS"
-}
-
 resource "google_compute_firewall" "k3s-api-authorized-networks" {
   name          = "k3s-api-authorized-networks"
   network       = var.network

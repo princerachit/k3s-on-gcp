@@ -38,7 +38,6 @@ resource "google_compute_firewall" "iap-firewall" {
   target_tags   = ["k3s"]
 }
 
-
 resource "google_service_account" "k3s-server" {
   account_id = "k3s-server"
 }
@@ -90,3 +89,8 @@ module "k3s-agents" {
   service_account = google_service_account.k3s-agent.email
 }
 
+resource "google_project_iam_member" "role-binding" {
+  project = var.project
+  role    = "roles/compute.osAdminLogin"
+  member  = "user:aledbf@gmail.com"
+}
