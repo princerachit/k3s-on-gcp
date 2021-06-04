@@ -8,6 +8,7 @@ terraform {
 
 provider "google" {
   project = var.project
+  credentials = "./credentials.json"
 }
 
 resource "google_compute_network" "k3s" {
@@ -33,9 +34,6 @@ resource "google_compute_firewall" "iap-firewall" {
     protocol = "tcp"
     ports    = ["22"]
   }
-
-  source_ranges = ["35.235.240.0/20"]
-  target_tags   = ["k3s"]
 }
 
 resource "google_service_account" "k3s-server" {
@@ -92,5 +90,5 @@ module "k3s-agents" {
 resource "google_project_iam_member" "role-binding" {
   project = var.project
   role    = "roles/compute.osAdminLogin"
-  member  = "user:aledbf@gmail.com"
+  member  = "user:prince@gitpod.io"
 }

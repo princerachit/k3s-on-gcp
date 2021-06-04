@@ -10,7 +10,7 @@ servers = {
   cidr_range          = "10.128.0.0/21"
   machine_type        = "n2-standard-4"
   target_size         = 3
-  authorized_networks = "200.83.32.243/32"
+  authorized_networks = "0.0.0.0/0"
 }
 
 agents = {
@@ -27,3 +27,5 @@ agents = {
     target_size  = 1
   },
 }
+
+project = "prince-tf-experiments"

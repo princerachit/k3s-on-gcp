@@ -10,7 +10,7 @@ servers = {
   cidr_range          = "10.128.0.0/20"
   machine_type        = "e2-micro"
   target_size         = 3
-  authorized_networks = "200.83.32.243/32"
+  authorized_networks = "0.0.0.0/0"
 }
 
 agents = {

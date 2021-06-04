@@ -25,13 +25,12 @@ resource "google_compute_instance_template" "k3s-server" {
   metadata_startup_script = data.template_file.k3s-server-startup-script.rendered
 
   metadata = {
-    block-project-ssh-keys = "FALSE"
-    enable-oslogin         = "FALSE"
-    ssh-keys               = "aledbf_gmail_com:${file("/home/aledbf/.ssh/id_rsa.pub")}"
+    block-project-ssh-keys = "TRUE"
+    enable-oslogin         = "TRUE"
   }
 
   disk {
-    source_image = "gitpod-k3s-20210531-01"
+    source_image = "gitpod-k3s-20210603-01"
     auto_delete  = true
     boot         = true
     disk_size_gb = 50
